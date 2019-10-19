@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import router from './router'
+
 require('moment');
 require('../dashkit/libs/@shopify/draggable/lib/es5/draggable.bundle.legacy.js');
 require('../dashkit/libs/autosize/dist/autosize.min.js');
@@ -21,7 +23,7 @@ require('../dashkit/libs/list.js/dist/list.min.js');
 require('../dashkit/libs/quill/dist/quill.min.js');
 require('../dashkit/libs/select2/dist/js/select2.min.js');
 require('../dashkit/libs/chart.js/Chart.extension.min');
-require('../dashkit/js/theme.min');
+require('../dashkit/js/theme.js');
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,7 +36,10 @@ require('../dashkit/js/theme.min');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+// Component File
+import App from './App.vue'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44,4 +49,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router: router,
+    render: h => h(App)
 });
+
+export default app;

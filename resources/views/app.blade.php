@@ -18,20 +18,8 @@
 
 </head>
 <body>
-
-<div id="app">
-{{--    @yield('content')--}}
-    <!-- NAVIGATION -->
-{{--    @include('layouts.sidebar')--}}
-
-    <!-- MAIN CONTENT -->
-{{--    <div class="main-content">--}}
-{{--        @yield('content')--}}
-{{--    </div>--}}
-</div>
-
-<!-- Scripts -->
-<script src="{{ mix('js/app.js', 'assets') }}" defer></script>
-
+    <div id="app"></div>
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js', 'assets') }}" defer></script>
 </body>
 </html>

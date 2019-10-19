@@ -20,5 +20,4 @@ mix
     .js('resources/js/app.js', 'js')
     .sass('resources/sass/libs.scss', 'css')
     .sass('resources/sass/theme.scss', 'css')
-    .sass('resources/sass/theme-dark.scss', 'css')
     .version();

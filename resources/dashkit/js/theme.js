@@ -4,68 +4,95 @@
         return this ? this.matches(e) ? this : this.parentElement ? this.parentElement.closest(e) : null : null
     }
 }(Element.prototype);
-var demoMode = function () {
-    var e, t, a, o, l, n, r, s, c = document.querySelector("#demoForm"),
-        i = document.querySelector("#topnav"),
-        d = document.querySelector("#topbar"),
-        u = document.querySelector("#sidebar"),
-        f = document.querySelector("#sidebarSmall"),
-        p = document.querySelector("#sidebarUser"),
-        b = document.querySelector("#sidebarSmallUser"),
-        h = document.querySelector("#sidebarSizeContainer"),
-        v = document.querySelectorAll('input[name="navPosition"]'),
-        m = document.querySelectorAll('[class^="container"]'),
-        g = (document.querySelectorAll("#stylesheetLight, #stylesheetDark"), document.querySelector("#stylesheetLight")),
-        y = document.querySelector("#stylesheetDark"),
-        S = {
-            colorScheme: localStorage.getItem("dashkitColorScheme") ? localStorage.getItem("dashkitColorScheme") : "light",
-            navPosition: localStorage.getItem("dashkitNavPosition") ? localStorage.getItem("dashkitNavPosition") : "sidenav",
-            navColor: localStorage.getItem("dashkitNavColor") ? localStorage.getItem("dashkitNavColor") : "default",
-            sidebarSize: localStorage.getItem("dashkitSidebarSize") ? localStorage.getItem("dashkitSidebarSize") : "base"
-        };
 
-    function C(e) {
-        "topnav" == e ? $(h).collapse("hide") : $(h).collapse("show")
-    }
+// var demoMode = function () {
+//     var e,
+//         t,
+//         a,
+//         o,
+//         l,
+//         n,
+//         r,
+//         s,
+//         c = document.querySelector("#demoForm"),
+//         i = document.querySelector("#topnav"),
+//         d = document.querySelector("#topbar"),
+//         u = document.querySelector("#sidebar"),
+//         f = document.querySelector("#sidebarSmall"),
+//         p = document.querySelector("#sidebarUser"),
+//         b = document.querySelector("#sidebarSmallUser"),
+//         // h = document.querySelector("#sidebarSizeContainer"),
+//         v = document.querySelectorAll('input[name="navPosition"]'),
+//         m = document.querySelectorAll('[class^="container"]'),
+//         g = (document.querySelectorAll("#stylesheetLight, #stylesheetDark"), document.querySelector("#stylesheetLight")),
+//         y = document.querySelector("#stylesheetDark"),
+//         S = {
+//             colorScheme: "light",
+//             navPosition: "sidenav",
+//             navColor: "default",
+//             sidebarSize: "base"
+//         };
+//
+//     function C(e) {
+//         // "topnav" == e ? $(h).collapse("hide") : $(h).collapse("show")
+//     }
+//
+//     // приховує блоки на сторінці
+//     function k(e) {
+//         e.setAttribute("style", "display: none !important")
+//     }
+//     return function () {
+//         // for (var e = window.location.search.substring(1).split("&"), t = 0; t < e.length; t++) {
+//         //     var a = e[t].split("="),
+//         //         o = a[0],
+//         //         l = a[1];
+//         //     "colorScheme" != o && "navPosition" != o && "navColor" != o && "sidebarSize" != o || (localStorage.setItem("dashkit" + o.charAt(0).toUpperCase() + o.slice(1), l), S[o] = l)
+//         // }
+//     }(),
+//         "light" == (e = S.colorScheme) ? (g.disabled = !1, y.disabled = !0, e = "light") : "dark" == e && (g.disabled = !0, y.disabled = !1, e = "dark"),
+//
+//         function (e) {
+//             // if (i && d && u && f && p && b)
+//             //     if ("topnav" == e) {
+//             //         // приховуємо блоки на сторінці
+//             //         k(d), k(u), k(f);
+//             //         for (var t = 0; t < m.length; t++) m[t].classList.remove("container-fluid"), m[t].classList.add("container")
+//             //     } else if ("combo" == e) {
+//             //         // приховуємо блоки на сторінці
+//             //         k(i), k(p), k(b);
+//             //         for (t = 0; t < m.length; t++) m[t].classList.remove("container"), m[t].classList.add("container-fluid")
+//             //     } else if ("sidenav" == e) {
+//             //         // приховуємо блоки на сторінці (#topnav і #topbar там де контент
+//             //         k(i), k(d);
+//             //         for (t = 0; t < m.length; t++) m[t].classList.remove("container"), m[t].classList.add("container-fluid")
+//             //     }
+//         }(S.navPosition),
+//
+//         t = S.navColor,
+//         u &&
+//         f &&
+//         i &&
+//         ("default" == t ? (u.classList.add("navbar-light"), f.classList.add("navbar-light"), i.classList.add("navbar-light")) : "inverted" == t ? (u.classList.add("navbar-dark"), f.classList.add("navbar-dark"), i.classList.add("navbar-dark")) : "vibrant" == t && (u.classList.add("navbar-dark", "navbar-vibrant"), f.classList.add("navbar-dark", "navbar-vibrant"), i.classList.add("navbar-dark", "navbar-vibrant"))),
+//         "base" == (a = S.sidebarSize) ? k(f) : "small" == a && k(u), o = c, l = S.colorScheme, n = S.navPosition, r = S.navColor, s = S.sidebarSize, $(o).find('[name="colorScheme"][value="' + l + '"]').closest(".btn").button("toggle"), $(o).find('[name="navPosition"][value="' + n + '"]').closest(".btn").button("toggle"), $(o).find('[name="navColor"][value="' + r + '"]').closest(".btn").button("toggle"), $(o).find('[name="sidebarSize"][value="' + s + '"]').closest(".btn").button("toggle"), C(S.navPosition), document.body.style.display = "block", c && (c.addEventListener("submit", function (e) {
+//         e.preventDefault(),
+//             function (e) {
+//                 // var t = e.querySelector('[name="colorScheme"]:checked').value,
+//                 //     a = e.querySelector('[name="navPosition"]:checked').value,
+//                 //     o = e.querySelector('[name="navColor"]:checked').value,
+//                 //     l = e.querySelector('[name="sidebarSize"]:checked').value;
+//                 // localStorage.setItem("dashkitColorScheme", t), localStorage.setItem("dashkitNavPosition", a), localStorage.setItem("dashkitNavColor", o), localStorage.setItem("dashkitSidebarSize", l), window.location = window.location.pathname
+//             }(c)
+//     }), [].forEach.call(v, function (e) {
+//         e.parentElement.addEventListener("click", function () {
+//             // C(e.value)
+//         })
+//     })), !0
+// }();
 
-    function k(e) {
-        e.setAttribute("style", "display: none !important")
-    }
-    return function () {
-        for (var e = window.location.search.substring(1).split("&"), t = 0; t < e.length; t++) {
-            var a = e[t].split("="),
-                o = a[0],
-                l = a[1];
-            "colorScheme" != o && "navPosition" != o && "navColor" != o && "sidebarSize" != o || (localStorage.setItem("dashkit" + o.charAt(0).toUpperCase() + o.slice(1), l), S[o] = l)
-        }
-    }(), "light" == (e = S.colorScheme) ? (g.disabled = !1, y.disabled = !0, e = "light") : "dark" == e && (g.disabled = !0, y.disabled = !1, e = "dark"),
-        function (e) {
-            if (i && d && u && f && p && b)
-                if ("topnav" == e) {
-                    k(d), k(u), k(f);
-                    for (var t = 0; t < m.length; t++) m[t].classList.remove("container-fluid"), m[t].classList.add("container")
-                } else if ("combo" == e) {
-                    k(i), k(p), k(b);
-                    for (t = 0; t < m.length; t++) m[t].classList.remove("container"), m[t].classList.add("container-fluid")
-                } else if ("sidenav" == e) {
-                    k(i), k(d);
-                    for (t = 0; t < m.length; t++) m[t].classList.remove("container"), m[t].classList.add("container-fluid")
-                }
-        }(S.navPosition), t = S.navColor, u && f && i && ("default" == t ? (u.classList.add("navbar-light"), f.classList.add("navbar-light"), i.classList.add("navbar-light")) : "inverted" == t ? (u.classList.add("navbar-dark"), f.classList.add("navbar-dark"), i.classList.add("navbar-dark")) : "vibrant" == t && (u.classList.add("navbar-dark", "navbar-vibrant"), f.classList.add("navbar-dark", "navbar-vibrant"), i.classList.add("navbar-dark", "navbar-vibrant"))), "base" == (a = S.sidebarSize) ? k(f) : "small" == a && k(u), o = c, l = S.colorScheme, n = S.navPosition, r = S.navColor, s = S.sidebarSize, $(o).find('[name="colorScheme"][value="' + l + '"]').closest(".btn").button("toggle"), $(o).find('[name="navPosition"][value="' + n + '"]').closest(".btn").button("toggle"), $(o).find('[name="navColor"][value="' + r + '"]').closest(".btn").button("toggle"), $(o).find('[name="sidebarSize"][value="' + s + '"]').closest(".btn").button("toggle"), C(S.navPosition), document.body.style.display = "block", c && (c.addEventListener("submit", function (e) {
-        e.preventDefault(),
-            function (e) {
-                var t = e.querySelector('[name="colorScheme"]:checked').value,
-                    a = e.querySelector('[name="navPosition"]:checked').value,
-                    o = e.querySelector('[name="navColor"]:checked').value,
-                    l = e.querySelector('[name="sidebarSize"]:checked').value;
-                localStorage.setItem("dashkitColorScheme", t), localStorage.setItem("dashkitNavPosition", a), localStorage.setItem("dashkitNavColor", o), localStorage.setItem("dashkitSidebarSize", l), window.location = window.location.pathname
-            }(c)
-    }), [].forEach.call(v, function (e) {
-        e.parentElement.addEventListener("click", function () {
-            C(e.value)
-        })
-    })), !0
-}();
+
+
+
+
 ! function () {
     var e = {
             300: "#E3EBF6",
@@ -247,7 +274,8 @@ var demoMode = function () {
                 }
             })
         }
-        "undefined" != typeof Chart && (void 0 === demoMode ? a() : demoMode && "dark" == t && a())
+        "undefined" != typeof Chart && (void 0 === false ? a() : false && "dark" == t && a())
+        // "undefined" != typeof Chart && (void 0 === demoMode ? a() : demoMode && "dark" == t && a())
     }(),
     function () {
         var e = document.querySelectorAll('[data-toggle="autosize"]');
