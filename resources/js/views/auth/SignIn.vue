@@ -14,17 +14,15 @@
                 </p>
 
                 <!-- Form -->
-                <form>
+                <form action="#" @submit.prevent="login">
 
                     <!-- Email address -->
                     <div class="form-group">
-
-                        <!-- Label -->
-                        <label>Email Address</label>
-
-                        <!-- Input -->
-                        <input type="email" class="form-control" placeholder="name@address.com">
-
+                        <label for="inputEmail">Email Address</label>
+                        <input type="email" id="inputEmail" name="username" class="form-control" :class="{ 'is-invalid': serverError }" placeholder="name@address.com" v-model="username">
+                        <div class="invalid-feedback">
+                            {{ serverError }}
+                        </div>
                     </div>
 
                     <!-- Password -->
@@ -32,32 +30,29 @@
 
                         <div class="row">
                             <div class="col">
-
-                                <!-- Label -->
-                                <label>Password</label>
-
+                                <label for="inputPassword">Password</label>
                             </div>
                             <div class="col-auto">
 
                                 <!-- Help text -->
-                                <a href="password-reset.html" class="form-text small text-muted">
+                                <a href="#" class="form-text small text-muted">
                                     Forgot password?
                                 </a>
 
                             </div>
-                        </div> <!-- / .row -->
+                        </div>
 
                         <!-- Input group -->
                         <div class="input-group input-group-merge">
 
                             <!-- Input -->
-                            <input type="password" class="form-control form-control-appended" placeholder="Enter your password">
+                            <input type="password" id="inputPassword" name="password" class="form-control form-control-appended" placeholder="Enter your password" v-model="password">
 
                             <!-- Icon -->
                             <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fe fe-eye"></i>
-                  </span>
+                              <span class="input-group-text">
+                                <i class="fe fe-eye"></i>
+                              </span>
                             </div>
 
                         </div>
@@ -71,24 +66,45 @@
                     <!-- Link -->
                     <div class="text-center">
                         <small class="text-muted text-center">
-                            Don't have an account yet? <a href="sign-up.html">Sign up</a>.
+                            Don't have an account yet? <a href="#">Sign up</a>.
                         </small>
                     </div>
 
                 </form>
 
             </div>
-        </div> <!-- / .row -->
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: "SignIn",
+        data() {
+          return {
+              username: '',
+              password: '',
+              serverError: '',
+          }
+        },
         methods: {
             addClassToBody() {
                 const el = document.body;
                 el.classList.add('d-flex', 'align-items-center', 'bg-auth', 'border-top', 'border-top-2', 'border-primary');
+            },
+            login() {
+                this.$store.dispatch('retrieveToken', {
+                    username: this.username,
+                    password: this.password
+                })
+                    .then(response => {
+                        this.$router.push({ name: 'Dashboard' });
+                    })
+                    .catch(error => {
+                        this.serverError = error.response.data;
+                        this.username = '';
+                        this.password = '';
+                    });
             }
         },
         mounted() {

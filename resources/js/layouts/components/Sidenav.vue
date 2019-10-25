@@ -97,11 +97,14 @@
                 <!-- Navigation -->
                 <ul class="navbar-nav mb-md-4">
                     <li class="nav-item">
-                        <a class="nav-link " href="#">
-                            <i class="fe fe-log-out"></i> Logout (mfiyalka)
-                        </a>
+                        <router-link class="nav-link" :to="{ name: 'SignOut' }">
+                            <i class="fe fe-log-out"></i> Sing out
+                        </router-link>
+<!--                        <a class="nav-link " href="#">-->
+<!--                            <i class="fe fe-log-out"></i> Logout (mfiyalka)-->
+<!--                        </a>-->
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!loggedIn">
                         <router-link class="nav-link" :to="{ name: 'SignIn' }">
                             <i class="fe fe-log-in"></i> Sing in
                         </router-link>
@@ -131,7 +134,12 @@
 
 <script>
     export default {
-        name: "Sidenav"
+        name: "Sidenav",
+        computed: {
+            loggedIn() {
+                return this.$store.getters.loggedIn;
+            }
+        }
     }
 </script>
 

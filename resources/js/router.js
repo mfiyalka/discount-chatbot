@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Layout from "./layouts/index"
 import SignIn from "./views/auth/SignIn";
+import SingOut from "./views/auth/SingOut";
 import Dashboard from "./views/dashboard/Dashboard";
 import Customers from "./views/customers/Customers";
 import RatingsReviews from "./views/ratings-reviews/RatingsReviews";
@@ -13,6 +14,8 @@ import Users from "./views/users/Users";
 import TextComponent from "./views/text/TextComponent";
 import Manual from "./views/manual/Manual";
 
+import store from './store';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,13 +23,20 @@ const routes = [
         path: '/sing-in',
         name: 'SignIn',
         component: SignIn,
-        meta: { title: 'Sign in' }
+        meta: { title: 'Sign in', requiresVisitor: true }
+    },
+    {
+        path: '/sing-out',
+        name: 'SignOut',
+        component: SingOut,
+        meta: { title: 'Sign out' }
     },
     {
         path: '/',
         name: 'home',
         redirect: '/dashboard',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: 'dashboard',
@@ -39,6 +49,7 @@ const routes = [
     {
         path: '/customers',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -51,6 +62,7 @@ const routes = [
     {
         path: '/ratings-reviews',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -63,6 +75,7 @@ const routes = [
     {
         path: '/newsletters',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/telegram',
@@ -81,6 +94,7 @@ const routes = [
     {
         path: '/contact-centre',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -93,6 +107,7 @@ const routes = [
     {
         path: '/users',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -105,6 +120,7 @@ const routes = [
     {
         path: '/text',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -117,6 +133,7 @@ const routes = [
     {
         path: '/manual',
         component: Layout,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: '/',
@@ -141,6 +158,28 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title;
     }
     next();
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.loggedIn) {
+            next({
+                name: 'SignIn'
+            })
+        } else {
+            next()
+        }
+    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+        if (store.getters.loggedIn) {
+            next({
+                name: 'Dashboard'
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 });
 
 export default router;

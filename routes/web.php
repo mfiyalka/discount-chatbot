@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashkit');
-});
+//Route::get('/', function () {
+//    return view('dashkit');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{any}', 'AdminAppController@index')->where('any', '.*');
