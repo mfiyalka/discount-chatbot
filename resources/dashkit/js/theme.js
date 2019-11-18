@@ -764,29 +764,29 @@
             }(e)
         })
     }(),
-    function () {
-        var e = document.querySelectorAll('[data-toggle="select"]');
-
-        function l(e) {
-            if (!e.id) return e.text;
-            var t = e.element.dataset.avatarSrc;
-            if (t)(a = document.createElement("div")).innerHTML = '<span class="avatar avatar-xs mr-3"><img class="avatar-img rounded-circle" src="' + t + '" alt="' + e.text + '"></span><span>' + e.text + "</span>";
-            else var a = e.text;
-            return a
-        }
-        jQuery().select2 && e && [].forEach.call(e, function (e) {
-            ! function (e) {
-                var t = e.dataset.options;
-                t = t ? JSON.parse(t) : {};
-                var a = {
-                        dropdownParent: $(e).closest(".modal").length ? $(e).closest(".modal") : $(document.body),
-                        templateResult: l
-                    },
-                    o = Object.assign(t, a);
-                $(e).select2(o)
-            }(e)
-        })
-    }(),
+    // function () {
+    //     var e = document.querySelectorAll('[data-toggle="select"]');
+    //
+    //     function l(e) {
+    //         if (!e.id) return e.text;
+    //         var t = e.element.dataset.avatarSrc;
+    //         if (t)(a = document.createElement("div")).innerHTML = '<span class="avatar avatar-xs mr-3"><img class="avatar-img rounded-circle" src="' + t + '" alt="' + e.text + '"></span><span>' + e.text + "</span>";
+    //         else var a = e.text;
+    //         return a
+    //     }
+    //     jQuery().select2 && e && [].forEach.call(e, function (e) {
+    //         ! function (e) {
+    //             var t = e.dataset.options;
+    //             t = t ? JSON.parse(t) : {};
+    //             var a = {
+    //                     dropdownParent: $(e).closest(".modal").length ? $(e).closest(".modal") : $(document.body),
+    //                     templateResult: l
+    //                 },
+    //                 o = Object.assign(t, a);
+    //             $(e).select2(o)
+    //         }(e)
+    //     })
+    // }(),
     function () {
         var e = document.querySelectorAll('[data-toggle="tooltip"]');
         e && $(e).tooltip()

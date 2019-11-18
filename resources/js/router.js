@@ -10,7 +10,7 @@ import RatingsReviews from "./views/ratings-reviews/RatingsReviews";
 import Telegram from "./views/newsletters/Telegram";
 import Viber from "./views/newsletters/Viber";
 import ContactCentre from "./views/contact-centre/ContactCentre";
-import Users from "./views/users/Users";
+import Users from "./views/users/UsersList";
 import TextComponent from "./views/text/TextComponent";
 import Manual from "./views/manual/Manual";
 
